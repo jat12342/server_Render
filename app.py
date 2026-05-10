@@ -1,7 +1,8 @@
 from flask import Flask,request,url_for,redirect,jsonify
+import os
 
 app=Flask(__name__)
-@app.route("/",methods=["POST"])
+@app.route("/",methods=["GET","POST"])
 def h():
     if(request.method =="POST"):
         data=request.get_json()
@@ -11,5 +12,7 @@ def h():
         return "TRUE"
 
 
-        
-app.run()    
+if __name__ == "__main__":
+    Port=int(os.environ.get("PORT",5000))
+    app.run(host="0.0.0.0",port=Port)
+    
